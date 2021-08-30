@@ -41,7 +41,6 @@ const displayResult = fooditems  => {
 }
 
 const getFoodDetails = mealId => {
-    console.log(mealId);
     const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`;
     fetch(url)
     .then(res => res.json())
@@ -49,21 +48,25 @@ const getFoodDetails = mealId => {
 }
 
 const displayDetails = foodItemDetails => {
-    console.log(foodItemDetails);
     const detailsContainer = document.getElementById('food-description');
+    detailsContainer.textContent = '';
     const div = document.createElement('div');
     div.classList.add('card');
     div.innerHTML  = ` 
         <img src="${foodItemDetails.strMealThumb}" class="card-img-top" alt="..." />
         <div class="card-body">
-            <h5 class="card-title">${foodItemDetails.strMeal}</h5>
+            <h5 class="card-title">${foodItemDetails.strMeal}</h5><br>
+            <p class="card-text"> <strong>Ingridients:</strong> ${foodItemDetails.strIngredient1}, ${foodItemDetails.strIngredient2}, ${foodItemDetails.strIngredient3}, ${foodItemDetails.strIngredient4}, ${foodItemDetails.strIngredient5}, ${foodItemDetails.strIngredient6}</p>
             <p class="card-text">
+            <strong>Process:</strong>
             ${foodItemDetails.strInstructions.slice(0,250)}
             </p>
             <a href="${foodItemDetails.strSource}" class="btn btn-danger">Watch Video</a>
         </div>  
     `;
     detailsContainer.appendChild(div);
+    
+    
 
 }
 
